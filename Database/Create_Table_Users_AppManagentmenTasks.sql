@@ -1,0 +1,30 @@
+USE [AppManagementTasks]
+GO
+
+/****** Object:  Table [dbo].[Users]    Script Date: 20/04/2026 7:08:02 a. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Users](
+	[id_user] [int] IDENTITY(1,1) NOT NULL,
+	[name_user] [nvarchar](100) NOT NULL,
+	[email] [nvarchar](150) NOT NULL,
+	[create_date] [datetime2](7) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_user] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  DEFAULT (getdate()) FOR [create_date]
+GO
+
+
