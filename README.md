@@ -1,51 +1,49 @@
-# Prueba Técnica Fullstack - Backend API
+# Fullstack Technical Assessment – Backend API
 
-Este proyecto corresponde al backend de una aplicación de gestión de tareas desarrollada en:
+This project consists of the backend of a task management application developed using:
 
 - .NET Web API
 - SQL Server
 
 ---
 
-## 🎯 Objetivo
+## 🎯 Objective
 
-Proveer una API REST para la gestión de usuarios y tareas, permitiendo:
+Provide a REST API for user and task management, allowing users to:
 
-- Crear y listar usuarios
-- Crear y listar tareas
-- Asignar tareas a usuarios
-- Gestionar el estado de las tareas
-- Aplicar reglas de negocio definidas
+- Create and retrieve users
+- Create and retrieve tasks
+- Assign tasks to users
+- Manage task statuses
+- Apply defined business rules
 
 ---
 
-## 🧱 Arquitectura del proyecto
+## 🧱 Project Architecture
 
-El proyecto está organizado en una arquitectura en capas:
+The project follows a layered architecture:
 
-
-/Controllers -> Endpoints de la API
-/Services -> Lógica de negocio
-/Repositories -> Acceso a datos
-/Models -> Entidades
-/DTOs -> Objetos de transferencia de datos
+```text
+/Controllers -> API endpoints
+/Services -> Business logic
+/Repositories -> Data access
+/Models -> Entities
+/DTOs -> Data Transfer Objects
 /Data -> DbContext
-/Database -> Scripts de base de datos
-
+/Database -> Database scripts
+```
 
 ---
 
-## ⚙️ Configuración del proyecto
+## ⚙️ Project Configuration
 
-Antes de ejecutar el backend, es necesario configurar la conexión a la base de datos en el archivo:
+Before running the backend, you need to configure the database connection in the following file:
 
+`appsettings.json`
 
-appsettings.json
+### Required Configuration
 
-
-### Configuración requerida:
-
-```json id="n7v2kp"
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -54,88 +52,102 @@ appsettings.json
     }
   },
   "AllowedHosts": "*",
-
   "ConnectionStrings": {
     "DefaultConnections": "Server=LAPTOP-ESVUNNQO\\BUHOSQL2019; User Id=sa; Database=AppManagementTasks; Password=123456"
   }
 }
+```
 
-⚠️ Importante:
+⚠️ **Important:**
 
-Debes configurar correctamente el Server, User Id y Password según tu entorno local.
-Sin esta configuración la API no podrá conectarse a la base de datos.
-🗄️ Base de datos
+You must configure the Server, User Id, and Password according to your local environment.
 
-Dentro del proyecto existe una carpeta llamada:
-
-/Database
-``` id="q1z9hh"
-
-Allí se encuentran los scripts necesarios para la creación de la base de datos.
-SQL 2019
-
-### Orden de ejecución:
-
-1. Primero ejecutar el script de creación de **Tasks**
-2. Luego ejecutar el script de creación de **Users**
-
-⚠️ Es importante respetar este orden para evitar errores de relación de claves foráneas.
+Without this configuration, the API will not be able to connect to the database.
 
 ---
 
-## 🧾 Reglas de negocio implementadas
+## 🗄️ Database
 
-- El título de la tarea es obligatorio
-- Toda tarea debe estar asignada a un usuario
-- Estados válidos:
+Inside the project, there is a folder named:
+
+`/Database`
+
+It contains the scripts required to create the database.
+
+**SQL Server 2019**
+
+### Execution Order
+
+1. First, execute the script to create **Tasks**.
+2. Then, execute the script to create **Users**.
+
+⚠️ It is important to follow this order to avoid foreign key relationship errors.
+
+---
+
+## 🧾 Implemented Business Rules
+
+- The task title is required.
+- Every task must be assigned to a user.
+- Valid task statuses:
   - Pending
   - InProgress
   - Done
-- No se permite transición directa de:
-  - `Pending → Done`
+- Direct status transitions from `Pending → Done` are not allowed.
 
 ---
 
-## 🔌 Endpoints principales
+## 🔌 Main Endpoints
 
-### Usuarios
+### Users
 
+| Method | Endpoint |
+|---|---|
+| POST | `/api/users` |
+| GET | `/api/users` |
 
-POST /api/users
-GET /api/users
+### Tasks
 
-
-### Tareas
-
-
-POST /api/tasks
-GET /api/tasks
-PUT /api/tasks/{id}/status
-
-
----
-
-## ⚙️ Características del backend
-
-- Arquitectura en capas
-- Uso de DTOs
-- Validaciones en backend
-- Separación de responsabilidades
-- Manejo básico de errores
-- API REST con verbos HTTP correctos
+| Method | Endpoint |
+|---|---|
+| POST | `/api/tasks` |
+| GET | `/api/tasks` |
+| PUT | `/api/tasks/{id}/status` |
 
 ---
 
-## 🚀 Ejecución del proyecto
+## ⚙️ Backend Features
 
-```bash id="v6kq8m"
+- Layered architecture
+- DTO implementation
+- Backend validation
+- Separation of concerns
+- Basic error handling
+- RESTful API using appropriate HTTP methods
+
+---
+
+## 🚀 Running the Project
+
+Run the following commands:
+
+```bash
 dotnet restore
 dotnet run
-📌 Notas importantes
-La conexión a base de datos debe configurarse manualmente en appsettings.json
-La base de datos debe crearse ejecutando los scripts dentro de /Database
-El orden correcto de creación es obligatorio (Tasks → Users)
-👨‍💻 Autor
+```
 
-Brayan Reyes
-Proyecto desarrollado como prueba técnica Fullstack (.NET + Angular + SQL Server)
+---
+
+## 📌 Important Notes
+
+- The database connection must be configured manually in `appsettings.json`.
+- The database must be created by executing the scripts inside the `/Database` folder.
+- The correct execution order is mandatory (Tasks → Users).
+
+---
+
+## 👨‍💻 Author
+
+**Brayan Reyes**
+
+Project developed as part of a Fullstack Technical Assessment (.NET + Angular + SQL Server).
